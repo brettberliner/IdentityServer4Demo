@@ -13,45 +13,29 @@ namespace IdentityServer4Demo
         {
             ApiResource resource = new ApiResource("api1", "My API");
             resource.ApiSecrets.Add(new Secret("secret".Sha256()));
-            return new List<ApiResource>
-    {
-            resource  
-     //   new ApiResource("api1", "My API")
-    };
+            return new List<ApiResource> { resource };
         }
 
         public static IEnumerable<Client> GetClients()
         {
             return new List<Client>
-    {
-        new Client
-        {
-            ClientId = "client",
-
-            // no interactive user, use the clientid/secret for authentication
-            AllowedGrantTypes = GrantTypes.ClientCredentials,
-
-            // secret for authentication
-            ClientSecrets =
             {
-                new Secret("secret".Sha256())
-            },
-
-            // scopes that client has access to
-            AllowedScopes = { "api1" }
+                new Client
+                {
+                    ClientId = "client",
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
+                    ClientSecrets = { new Secret("secret".Sha256()) },
+                    AllowedScopes = { "api1" }
+                }
+            };
         }
-    };
+
+        public static List<TestUser> GetTestUsers()
+        {
+            return new List<TestUser>
+            {
+               new TestUser { Password = "testpass", Username = "testuser", SubjectId = "testsubject" }
+            };
         }
     }
 }
-
-
-            //public static List<TestUser> GetTestUsers()
-            //{
-            //    return new List<TestUser>
-            //    {
-            //       new TestUser { Password = "testpass", Username = "testuser" }
-            //    };
-            //}
-        
-

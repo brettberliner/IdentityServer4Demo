@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using IdentityServer4.Validation;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -15,8 +16,8 @@ namespace IdentityServer4Demo
             services.AddIdentityServer()
                 .AddTemporarySigningCredential()
                 .AddInMemoryApiResources(Configuration.GetApiResources())
-                .AddInMemoryClients(Configuration.GetClients());
-                //.AddTestUsers(Configuration.GetTestUsers());
+                .AddInMemoryClients(Configuration.GetClients())
+                .Services.AddTransient<IResourceOwnerPasswordValidator, DemoPasswordValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

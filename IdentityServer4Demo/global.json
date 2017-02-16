@@ -1,6 +1,0 @@
-{
-  "projects": [ "src", "test", "../../../Downloads/IdentityServer4-dev/src", "../../../Downloads/IdentityServer4.AccessTokenValidation-dev/src" ],
-  "sdk": {
-    "version": "1.0.0-preview2-003131"
-  }
-}
